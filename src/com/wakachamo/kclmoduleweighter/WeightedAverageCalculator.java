@@ -112,11 +112,11 @@ public class WeightedAverageCalculator {
                 int level = module.getLevel();
                 if (i == this.highestModuleLevel) {
                     if (this.isMasters()) {
-                        if (creditsTotal > MASTERS_CREDITS_MIN) {
+                        if (creditsTotal >= MASTERS_CREDITS_MIN) {
                             level--;
                         }
                     } else {
-                        if (creditsTotal > BSC_CREDITS_MIN) {
+                        if (creditsTotal >= BSC_CREDITS_MIN) {
                             level--;
                         }
                     }
