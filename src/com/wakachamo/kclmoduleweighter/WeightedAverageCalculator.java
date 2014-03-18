@@ -90,10 +90,11 @@ public class WeightedAverageCalculator {
 
                     @Override
                     public int compare(Module o1, Module o2) {
-                        return Integer.signum(o1.getGrade() - o2.getGrade());
+                        return Integer.signum(o2.getGrade() - o1.getGrade());
                     }
                 });
             }
+            System.out.println(modulesForLevel);
 
             int creditsTotal = 0;
 

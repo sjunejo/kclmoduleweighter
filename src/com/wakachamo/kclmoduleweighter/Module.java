@@ -55,4 +55,9 @@ public class Module {
     public int getGrade() {
         return this.grade;
     }
+    
+    @Override
+    public String toString() {
+        return "Module " + this.getCode() + " - Grade: " + this.getGrade();
+    }
 }
