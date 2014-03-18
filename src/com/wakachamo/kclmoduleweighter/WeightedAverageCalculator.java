@@ -25,6 +25,8 @@ public class WeightedAverageCalculator {
      */
     private static final int MASTERS_CREDITS_MIN = 120;
     private static final int BSC_CREDITS_MIN = 90;
+    
+    private static final int ATOMIC_CREDIT = 15;
 
     private final boolean masters;
     private int highestModuleLevel;
@@ -59,7 +61,14 @@ public class WeightedAverageCalculator {
     public void setModule(String name, int credits, int grade) {
         Module module = new Module(name, credits, grade);
         ArrayList<Module> modulesForLevel = this.modulesForLevel(module.getLevel());
-        modulesForLevel.add(module);
+        int times = credits / ATOMIC_CREDIT;
+        for (int i = 0; i < times; i++) {
+            //We're splitting any modules whose credit levels are higher than 15
+            //so that that correct number of credits are counted for the 
+            //highest scored sums
+            Module replacementModule = new Module(name, ATOMIC_CREDIT, grade);
+            modulesForLevel.add(replacementModule);
+        }
         this.highestModuleLevel = Math.max(this.highestModuleLevel, module.getLevel());
         this.lowestModuleLevel = Math.min(this.lowestModuleLevel, module.getLevel());
     }
@@ -94,7 +103,7 @@ public class WeightedAverageCalculator {
                     }
                 });
             }
-            System.out.println(modulesForLevel);
+            //System.out.println(modulesForLevel);
 
             int creditsTotal = 0;
 
